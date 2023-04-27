@@ -1,0 +1,6 @@
+.category:hover a, .category:hover{
+    background-color: rgb(182, 183, 185) !important;
+}
+.category{
+    margin: 0;
+}
