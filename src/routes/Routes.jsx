@@ -4,11 +4,11 @@ import Home from "../pages/Home/Home/Home";
 import Category from "../pages/Home/Category/Category";
 import NewsLayout from "../layouts/NewsLayout";
 import News from "../pages/News/News/News";
-import About from "../pages/About/About";
-import Career from "../pages/Career/Career";
 import LoginLayout from "../layouts/LoginLayout/LoginLayout";
 import Login from "../pages/Login/Login/Login";
 import Regester from "../pages/Login/Regester/Regester";
+import About from "../pages/About/About";
+import Career from "../pages/Career/Career";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +28,6 @@ const router = createBrowserRouter([
                 path: "register",
                 element: <Regester></Regester>
             },
-            ,
             {
                 path: "about",
                 element: <About></About>
