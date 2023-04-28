@@ -1,4 +1,4 @@
-.category:hover a, .category:hover{
+.category:hover a, .category:hover, .active-category{
     background-color: rgb(182, 183, 185) !important;
 }
 .category{
