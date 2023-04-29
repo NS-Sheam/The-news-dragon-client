@@ -38,7 +38,7 @@ const Regester = () => {
             })
     }
     return (
-        <Container className='mx-auto w-25'>
+        <Container className='mx-auto'>
             <Row>
                 <Col className='col-md-4 mx-auto'>
                     <h3>Please Register</h3>
