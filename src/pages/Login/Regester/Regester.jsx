@@ -40,7 +40,7 @@ const Regester = () => {
     return (
         <Container className='mx-auto'>
             <Row>
-                <Col className='col-md-4 mx-auto'>
+                <Col className='col-md-4'>
                     <h3>Please Register</h3>
                     <Form onSubmit={handleRegister}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
