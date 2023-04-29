@@ -9,6 +9,8 @@ import Login from "../pages/Login/Login/Login";
 import Regester from "../pages/Login/Regester/Regester";
 import About from "../pages/About/About";
 import Career from "../pages/Career/Career";
+import PrivateRoute from "./PrivateRoute";
+import Terms from "../pages/Shared/Terms/Terms";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +20,6 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Navigate to={"Category/0"}></Navigate>
-
             },
             {
                 path: "login",
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <Regester></Regester>
+            },
+            {
+
+                path: "terms",
+                element: <Terms></Terms>
             },
             {
                 path: "about",
@@ -45,18 +51,18 @@ const router = createBrowserRouter([
             {
                 path: ":id",
                 element: <Category></Category>,
-                loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
             }
         ]
     },
     {
         path: "news",
-        element:<NewsLayout></NewsLayout>,
+        element: <NewsLayout></NewsLayout>,
         children: [
             {
                 path: ":id",
-                element: <News></News>,
-                loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`)
+                element: <PrivateRoute><News></News></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/news/${params.id}`)
             }
         ]
     }

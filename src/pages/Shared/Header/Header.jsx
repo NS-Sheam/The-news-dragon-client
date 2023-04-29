@@ -12,11 +12,13 @@ const Header = () => {
     return (
         <Container className='mt-4'>
             <div className="text-center">
-                <img className='img-fluid' src={logo} alt="" />
+                <Link to="/category/0">
+                    <img className='img-fluid' src={logo} alt="" />
+                </Link>
                 <p className="text-secondary"><small>Journalism Without  Fear or  Favour</small></p>
                 <p>{moment().format("dddd, MMM Do, YYYY")}</p>
             </div>
-            <div className='d-flex'>
+            <div className='d-flex mb-2'>
                 <Button variant='danger'>Latest</Button>
                 <Marquee gradient={true} gradientWidth={100} className='text-danger' speed={100}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaeca-dti iusto repellendus magni temporibus error, explicabo distinctio,</Marquee>
             </div>

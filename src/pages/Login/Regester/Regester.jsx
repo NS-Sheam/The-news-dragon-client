@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 const Regester = () => {
+    const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [accepted, setAccepted] = useState(false);
+
+    const handleAccpeted = event =>
+    setAccepted(event.target.checked);
+
+    const handleRegister = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const photo = form.photo.value;
+        const password = form.password.value;
+        // console.log(name, email, photo, password);
+        createUser(email, password)
+            .then(async (result) => {
+                const createdUser = result.user;
+                await updateProfile(createdUser, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                console.log(createdUser);
+                navigate("/category/0")
+                form.reset();
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
     return (
         <Container className='mx-auto w-25'>
             <h3>Please Register</h3>
-            <Form>
+            <Form onSubmit={handleRegister}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Your Name</Form.Label>
                     <Form.Control type="text" name='name' placeholder="Enter your name" required />
@@ -27,12 +59,21 @@ const Regester = () => {
 
                 <Form.Group className="mb-3 py-2" controlId="formBasicPassword">
                     <Form.Label>Enter password</Form.Label>
-                    <Form.Control type="password" name='passwords' placeholder="Password" required />
+                    <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" name='accept' label="Accept terms and condition" />
+                    <Form.Check
+                        onClick={handleAccpeted}
+                        type="checkbox"
+                        name='accept'
+                        label={<>Accept <Link to="/terms">terms and condition</Link></>} 
+                        required/>
                 </Form.Group>
-                <Button variant="dark" type="submit" className='fw-bold d-block w-100 py-2'>
+                <Button 
+                variant="dark" 
+                type="submit" 
+                className='fw-bold d-block w-100 py-2'
+                disabled={!accepted}>
                     Register
                 </Button>
                 <br />
